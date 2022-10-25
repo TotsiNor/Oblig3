@@ -3,9 +3,12 @@ package no.oslomet.cs.algdat.Oblig3;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.StringJoiner;
 
+
 public class SBinTre<T> {
+
     private static final class Node<T>   // en indre nodeklasse
     {
         private T verdi;                   // nodens verdi
@@ -97,19 +100,16 @@ public class SBinTre<T> {
 
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-        p = new Node<>(verdi);                   // oppretter en ny node
+        p = new Node<> (verdi,null,null,q);                   // oppretter en ny node
 
         if (q == null) {
             rot = p;                  // p blir rotnode
-            rot.forelder = null;      // forelder til rot er alltid null
         }
         else if (cmp < 0) {
             q.venstre = p;         // venstre barn til q
-            p.forelder = q;       // q er forelder til p
         }
         else {
             q.høyre = p;                        // høyre barn til q
-            p.forelder = q;                     // q er forelder til p
         }
         antall++;                                // én verdi mer i treet
         return true;                             // vellykket innlegging
@@ -158,6 +158,4 @@ public class SBinTre<T> {
     static <K> SBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
-
-
 } // ObligSBinTre
