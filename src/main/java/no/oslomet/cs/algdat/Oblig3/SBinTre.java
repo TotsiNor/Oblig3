@@ -147,34 +147,30 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        while(p!= null)
+        while(true) // Vil finne første uten venstre eller høyre barn
         {
-            if(p.venstre != null)
+            if(p.venstre != null) // Sjekker for venstre barn
                 p = p.venstre;
-            else if (p.høyre != null)
+            else if (p.høyre != null) // sjekker for høyre barn
                 p = p.høyre;
-            else
-                break;
+            else return p; // P er førstePostorden da den verken har høyre eller venstre barn.
         }
-        return p;
+
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
         if(p.forelder == null) // p er rotnode og da sist i postorden
             return p;
-        else
-        {
-            Node <T> f = p.forelder; // Testnode for forelder
-            if(f.høyre == p) // P er høyre barn til forelder, forelder er neste
-                return f;
-            else
-            {
-            if(f.høyre == null) // P er enebarn, forelder er neste
-                return f;
-            else // P er venstre barn og ikke enebarn. Neste er første i subtreet med f.høyre som rot.
-                return førstePostorden(f.høyre);
-            }
-        }
+
+        Node <T> f = p.forelder; // Testnode for forelder
+        if(f.høyre == p) // P er høyre barn til forelder, forelder er neste
+            return f;
+        else if(f.høyre == null)// P er enebarn, forelder er neste
+            return f;
+        else // P er ikke enebarn, første i postorden med forelder som rot er neste
+            return førstePostorden(f.høyre);
+
+
 
     }
 
