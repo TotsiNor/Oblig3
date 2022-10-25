@@ -10,4 +10,6 @@ Oppgaven er levert av følgende student:
 I oppgave 1 så gikk jeg frem ved å kopiere Programkode 5.2.3.a) som oppfordret til i oppgavetekst. Gjorde endringer slik at
 noden man legger inn får riktig forelder. 
 
-I oppgave 2 så brukte jeg en ... til å ...
+I oppgave 2 så brukte jeg tom og inneholder for å sjekke om treet er tomt eller ikke inneholder verdien. I så fall
+returnerer vi 0. Deretter brukte jeg iterasjonsmetoden til inneholder for å gå gjennom treet. Ved verdi funnet avslutter 
+vi ikke funksjonen som i inneholder, men vi øker antall av verdien og går videre til høyre. 

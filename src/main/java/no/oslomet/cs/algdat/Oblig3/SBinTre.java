@@ -124,16 +124,16 @@ public class SBinTre<T> {
     }
 
     public int antall(T verdi) {
-        if(tom() == true || inneholder(verdi) == false )
+        if(tom() == true || inneholder(verdi) == false ) // sjekker om treet er tomt eller ikke inneholder verdien
             return 0;
 
             Node <T> p = rot;
             int antallVerdi = 0;
-            while (p != null) {
+            while (p != null) { // Itererer treet
                 int cmp = comp.compare(verdi, p.verdi);
-                if (cmp < 0) p = p.venstre;
-                else if (cmp > 0) p = p.høyre;
-                else
+                if (cmp < 0) p = p.venstre;          // verdi er mindre enn p, går til venstre
+                else if (cmp > 0) p = p.høyre;       // verdi er større enn p, går til høyre
+                else                                // om verdien er funnet øker vi antallVerdi og går til høyre i treet
                 {
                     antallVerdi++;
                     p = p.høyre;
@@ -173,4 +173,5 @@ public class SBinTre<T> {
     static <K> SBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
+
 } // ObligSBinTre
