@@ -160,7 +160,7 @@ public class SBinTre<T> {
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
         if(p.forelder == null) // p er rotnode og da sist i postorden
-            return p;
+            return null;
 
         Node <T> f = p.forelder; // Testnode for forelder
         if(f.høyre == p) // P er høyre barn til forelder, forelder er neste
