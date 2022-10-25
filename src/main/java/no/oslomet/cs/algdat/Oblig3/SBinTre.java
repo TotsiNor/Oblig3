@@ -124,19 +124,22 @@ public class SBinTre<T> {
     }
 
     public int antall(T verdi) {
-        if(tom() == true || inneholder == false )
+        if(tom() == true || inneholder(verdi) == false )
             return 0;
-        else
-        {
-            Node <T> p = rot;
 
+            Node <T> p = rot;
+            int antallVerdi = 0;
             while (p != null) {
                 int cmp = comp.compare(verdi, p.verdi);
                 if (cmp < 0) p = p.venstre;
                 else if (cmp > 0) p = p.høyre;
-                else return true;
-            }
+                else
+                {
+                    antallVerdi++;
+                    p = p.høyre;
+                }
         }
+            return antallVerdi;
     }
 
     public void nullstill() {
