@@ -147,11 +147,31 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        while(true) // Vil finne første uten venstre eller høyre barn
+        {
+            if(p.venstre != null) // Sjekker for venstre barn
+                p = p.venstre;
+            else if (p.høyre != null) // sjekker for høyre barn
+                p = p.høyre;
+            else return p; // P er førstePostorden da den verken har høyre eller venstre barn.
+        }
+
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if(p.forelder == null) // p er rotnode og da sist i postorden
+            return null;
+
+        Node <T> f = p.forelder; // Testnode for forelder
+        if(f.høyre == p) // P er høyre barn til forelder, forelder er neste
+            return f;
+        else if(f.høyre == null)// P er enebarn, forelder er neste
+            return f;
+        else // P er ikke enebarn, første i postorden med forelder som rot er neste
+            return førstePostorden(f.høyre);
+
+
+
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
