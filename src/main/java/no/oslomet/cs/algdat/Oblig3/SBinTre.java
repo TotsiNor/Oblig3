@@ -177,10 +177,9 @@ public class SBinTre<T> {
     public void postorden(Oppgave<? super T> oppgave) {
 
         Node <T> p = førstePostorden(rot);
-        oppgave.utførOppgave(p.verdi);
-        while(p!= null) {
-            p = nestePostorden(p);
+        while(p != null) {
             oppgave.utførOppgave(p.verdi);
+            p = nestePostorden(p);
         }
     }
 
@@ -189,8 +188,7 @@ public class SBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        while(p != null)
-        {
+        if(p != null) {
             oppgave.utførOppgave(p.verdi);
             postordenRecursive(nestePostorden(p), oppgave);
         }
