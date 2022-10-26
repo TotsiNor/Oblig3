@@ -175,7 +175,13 @@ public class SBinTre<T> {
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        Node <T> p = førstePostorden(rot);
+        oppgave.utførOppgave(p.verdi);
+        while(p!= null) {
+            p = nestePostorden(p);
+            oppgave.utførOppgave(p.verdi);
+        }
     }
 
     public void postordenRecursive(Oppgave<? super T> oppgave) {
@@ -183,7 +189,11 @@ public class SBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        while(p != null)
+        {
+            oppgave.utførOppgave(p.verdi);
+            postordenRecursive(nestePostorden(p), oppgave);
+        }
     }
 
     public ArrayList<T> serialize() {
