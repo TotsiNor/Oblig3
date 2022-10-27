@@ -2,7 +2,7 @@
 
 Denne oppgaven er en innlevering i Algoritmer og Datastrukturer. 
 Oppgaven er levert av følgende student:
-* Sondre Trodahl, S351957, s351957@oslomet.no
+* Sondre, S351957, s351957@oslomet.no
 
 
 # Oppgavebeskrivelse
