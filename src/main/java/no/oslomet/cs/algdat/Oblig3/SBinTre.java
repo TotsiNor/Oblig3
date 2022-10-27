@@ -94,21 +94,19 @@ public class SBinTre<T> {
         while (p != null)       // fortsetter til p er ute av treet
         {
             q = p;                                 // q er forelder til p
-            cmp = comp.compare(verdi,p.verdi);     // bruker komparatoren
+            cmp = comp.compare(verdi, p.verdi);     // bruker komparatoren
             p = cmp < 0 ? p.venstre : p.høyre;     // flytter p
         }
 
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-        p = new Node<> (verdi,null,null,q);                   // oppretter en ny node
+        p = new Node<>(verdi, null, null, q);                   // oppretter en ny node
 
         if (q == null) {
             rot = p;                  // p blir rotnode
-        }
-        else if (cmp < 0) {
+        } else if (cmp < 0) {
             q.venstre = p;         // venstre barn til q
-        }
-        else {
+        } else {
             q.høyre = p;                        // høyre barn til q
         }
         antall++;                                // én verdi mer i treet
@@ -124,22 +122,22 @@ public class SBinTre<T> {
     }
 
     public int antall(T verdi) {
-        if(tom() == true || inneholder(verdi) == false ) // sjekker om treet er tomt eller ikke inneholder verdien
+        if (tom() == true || inneholder(verdi) == false) // sjekker om treet er tomt eller ikke inneholder verdien
             return 0;
 
-            Node <T> p = rot;
-            int antallVerdi = 0;
-            while (p != null) { // Itererer treet
-                int cmp = comp.compare(verdi, p.verdi);
-                if (cmp < 0) p = p.venstre;          // verdi er mindre enn p, går til venstre
-                else if (cmp > 0) p = p.høyre;       // verdi er større enn p, går til høyre
-                else                                // om verdien er funnet øker vi antallVerdi og går til høyre i treet
-                {
-                    antallVerdi++;
-                    p = p.høyre;
-                }
+        Node<T> p = rot;
+        int antallVerdi = 0;
+        while (p != null) { // Itererer treet
+            int cmp = comp.compare(verdi, p.verdi);
+            if (cmp < 0) p = p.venstre;          // verdi er mindre enn p, går til venstre
+            else if (cmp > 0) p = p.høyre;       // verdi er større enn p, går til høyre
+            else                                // om verdien er funnet øker vi antallVerdi og går til høyre i treet
+            {
+                antallVerdi++;
+                p = p.høyre;
+            }
         }
-            return antallVerdi;
+        return antallVerdi;
     }
 
     public void nullstill() {
@@ -147,9 +145,9 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        while(true) // Vil finne første uten venstre eller høyre barn
+        while (true) // Vil finne første uten venstre eller høyre barn
         {
-            if(p.venstre != null) // Sjekker for venstre barn
+            if (p.venstre != null) // Sjekker for venstre barn
                 p = p.venstre;
             else if (p.høyre != null) // sjekker for høyre barn
                 p = p.høyre;
@@ -159,32 +157,43 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        if(p.forelder == null) // p er rotnode og da sist i postorden
+        if (p.forelder == null) // p er rotnode og da sist i postorden
             return null;
 
-        Node <T> f = p.forelder; // Testnode for forelder
-        if(f.høyre == p) // P er høyre barn til forelder, forelder er neste
+        Node<T> f = p.forelder; // Testnode for forelder
+        if (f.høyre == p) // P er høyre barn til forelder, forelder er neste
             return f;
-        else if(f.høyre == null)// P er enebarn, forelder er neste
+        else if (f.høyre == null)// P er enebarn, forelder er neste
             return f;
         else // P er ikke enebarn, første i postorden med forelder som rot er neste
             return førstePostorden(f.høyre);
 
 
-
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        Node<T> p = førstePostorden(rot); // Starter med å finne første post orden node
+        while (p != null) { // Så lenge vi ikkke har nådd slutten fortsetter vi
+            oppgave.utførOppgave(p.verdi); // utfører oppgave
+            p = nestePostorden(p); // går til neste node i postorden
+        }
     }
 
     public void postordenRecursive(Oppgave<? super T> oppgave) {
-        postordenRecursive(rot, oppgave);
+        postordenRecursive(førstePostorden(rot), oppgave); // Endret fra rot til å sende førstepostorden først.
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        if (p == null) { // om slutten av tre i postorden så avslutter vi den rekursive funksjonen
+            return;
+        }
+        oppgave.utførOppgave(p.verdi); // Utfører oppgave
+        postordenRecursive(nestePostorden(p), oppgave); // Kaller funksjonen på nytt men med neste node i post orden.
     }
+
+
 
     public ArrayList<T> serialize() {
         throw new UnsupportedOperationException("Ikke kodet ennå!");

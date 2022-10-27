@@ -21,3 +21,9 @@ eller venstre er vi i første post orden. Da returnerer vi denne. Andre funkksjo
 p har forelder. Dersom den ikke har det er den rotnode og sist i post orden. Returnerer da null. Videre om den har forelder sjekker vi om
 den er høyre barn, i så fall er forelder neste. Dersom p er venstre enebarn er forelder neste. Dersom ingen av disse stemmer er første post orden
 med forelder som rot neste. Da bruker vi funksjonen førstepostorden for å finne dennne. 
+
+I oppgave 4 har vi som i oppgave 3 to funksjoner. Den første er postorden(Oppgave<? super T> oppgave). Her bruker jeg først
+funksjonen førstepostorden på rot slik at jeg får satt opp en "test-node" som er den første i postorden. Deretter bruker jeg
+en while løkke som kjører til noden vi ser på er null, i så fall har vi traversert hele treet. På den rekursive oppgave funksjonen 
+brukte jeg en if statement for å sjekke om noden er null. I så fall går vi ut av funksjonen. Dersom noden ikke er null gjøres oppgaven 
+også kaller vi funksjonen på nytt med neste node i postorden. 
